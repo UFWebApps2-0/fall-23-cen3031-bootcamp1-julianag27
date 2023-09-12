@@ -59,10 +59,7 @@ fs.readFile('listings.json', 'utf8', function(err, data) {
     https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/throw#throwing_an_existing_object
    */
     if(err){
-        response.writeHead(404, {
-            'Content-Type' : 'text/plain'
-        });
-        response.end('Bad Gateway Error');
+        console.error(err);
         return;
     }
   
@@ -70,7 +67,7 @@ fs.readFile('listings.json', 'utf8', function(err, data) {
     listingData = JSON.parse(data);
 
   //Creates the server
-    var server = http.createServer(requestHandler);
+    server = http.createServer(requestHandler);
   //Start the server
     server.listen(port, function() {
   //once the server is listening, this callback function is executed
