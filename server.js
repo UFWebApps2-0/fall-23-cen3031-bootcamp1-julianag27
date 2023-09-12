@@ -1,6 +1,6 @@
 var http = require('http'), 
     fs = require('fs'), 
-    port = 3000;
+    port = 8080;
 
 /* Global variables */
 var listingData, server;
