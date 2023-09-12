@@ -29,6 +29,17 @@ var requestHandler = function(request, response) {
     Helpful example: if-else structure- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else
 
     */
+    if(request.method === 'GET' && request.url === '/listings'){
+        response.writeHead(200, {
+            'Content-Type' : 'application/json'
+        });
+        response.end(JSON.stringify(listingData));
+    }else{
+        response.writeHead(404, {
+            'Content-Type' : 'text/plain'
+        });
+        response.end('Bad Gateway Error');
+    }
 };
 
 fs.readFile('listings.json', 'utf8', function(err, data) {
@@ -47,14 +58,23 @@ fs.readFile('listings.json', 'utf8', function(err, data) {
     /*this resource gives you an idea of the general format err objects and Throwing an existing object.
     https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/throw#throwing_an_existing_object
    */
+    if(err){
+        response.writeHead(404, {
+            'Content-Type' : 'text/plain'
+        });
+        response.end('Bad Gateway Error');
+        return;
+    }
   
-
    //Save the data in the listingData variable already defined
-  
+    listingData = JSON.parse(data);
 
   //Creates the server
-  
+    var server = http.createServer(requestHandler);
   //Start the server
-
+    server.listen(port, function() {
+  //once the server is listening, this callback function is executed
+    console.log('Server listening on: http://127.0.0.1:' + port);
+});
 
 });
