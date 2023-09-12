@@ -33,7 +33,7 @@ var requestHandler = function(request, response) {
         response.writeHead(200, {
             'Content-Type' : 'application/json'
         });
-        response.end(JSON.stringify(listingData));
+        response.end(listingData);
     }else{
         response.writeHead(404, {
             'Content-Type' : 'text/plain'
