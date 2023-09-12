@@ -30,10 +30,10 @@ var requestHandler = function(request, response) {
 
     */
     if(request.method === 'GET' && request.url === '/listings'){
-        /*response.writeHead(200, {
+        response.writeHead(200, {
             'Content-Type' : 'application/json'
-        });*/
-        response.write(JSON.stringify(listingData));
+        });
+        response.end(JSON.stringify(listingData));
     }else{
         response.writeHead(404, {
             'Content-Type' : 'text/plain'
